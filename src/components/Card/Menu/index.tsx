@@ -12,8 +12,8 @@ export default function Menu({ onDelete, onCopy }: any) {
 	return (
 		<View style={styles.menu}>
 			<TouchableOpacity style={styles.menuItem} onPress={onCopy}>
-                <Text style={styles.menuText}>Copy</Text>
-            </TouchableOpacity>
+				<Text style={styles.menuText}>Copy</Text>
+			</TouchableOpacity>
 			<TouchableOpacity style={styles.menuItem} onPress={handleDelete}>
 				<Text style={[styles.menuText, styles.deleteText]}>Delete</Text>
 			</TouchableOpacity>
