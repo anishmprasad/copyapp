@@ -40,6 +40,12 @@ const Card = ({ navigation, card, onChangeText, onDelete }: any) => {
 		}
 	};
 
+  const handleCopyToClipboard = (text: string) => {
+    Clipboard.setString(text); // Copies the text to the clipboard
+    console.log('Text copied to clipboard:', text);
+    // Alert.alert('Text copied to clipboard!');
+  };
+
 	return (
 		<View style={styles.container}>
 			<TouchableWithoutFeedback
@@ -81,6 +87,9 @@ const Card = ({ navigation, card, onChangeText, onDelete }: any) => {
 								setMenuVisible(false);
 								onDelete(id);
 							}}
+              onCopy={() => {
+                handleCopyToClipboard(content)
+              }}
 						/>
 					)}
 				</View>
@@ -120,6 +129,8 @@ const styles = StyleSheet.create({
 		fontSize: 14,
 		color: '#555',
 		marginTop: 5,
+    height: 100, // Increase height
+		textAlignVertical: 'top', // Ensures text starts from the top
 	},
 	menuIcon: {
 		position: 'absolute',

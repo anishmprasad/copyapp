@@ -1,7 +1,7 @@
 import React from 'react';
 import { Alert, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
-export default function Menu({ onDelete }: any) {
+export default function Menu({ onDelete, onCopy }: any) {
 	const handleDelete = () => {
 		Alert.alert('Delete', 'Are you sure you want to delete this?', [
 			{ text: 'Cancel', style: 'cancel' },
@@ -11,9 +11,9 @@ export default function Menu({ onDelete }: any) {
 
 	return (
 		<View style={styles.menu}>
-			{/* <TouchableOpacity style={styles.menuItem} onPress={() => console.log('Edit Pressed')}>
-                <Text style={styles.menuText}>Edit</Text>
-            </TouchableOpacity> */}
+			<TouchableOpacity style={styles.menuItem} onPress={onCopy}>
+                <Text style={styles.menuText}>Copy</Text>
+            </TouchableOpacity>
 			<TouchableOpacity style={styles.menuItem} onPress={handleDelete}>
 				<Text style={[styles.menuText, styles.deleteText]}>Delete</Text>
 			</TouchableOpacity>
