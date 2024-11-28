@@ -64,6 +64,7 @@ const Card = ({ navigation, card, onChangeText, onDelete }: any) => {
 							onChangeText={setTextarea}
 							placeholder={'Paste content from the clipboard'}
 							multiline
+              onPressIn={() => handleCopyToClipboard(content)} 
 						/>
 					</SafeAreaView>
 
