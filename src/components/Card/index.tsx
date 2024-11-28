@@ -10,6 +10,7 @@ import {
 	TouchableWithoutFeedback,
 	TextInput,
 	SafeAreaView,
+  ToastAndroid,
 } from 'react-native';
 import { useHomeContext } from '../../context/Home';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -43,6 +44,7 @@ const Card = ({ navigation, card, onChangeText, onDelete }: any) => {
   const handleCopyToClipboard = (text: string) => {
     Clipboard.setString(text); // Copies the text to the clipboard
     console.log('Text copied to clipboard:', text);
+    ToastAndroid.show('Text copied to clipboard', ToastAndroid.SHORT);
     // Alert.alert('Text copied to clipboard!');
   };
 
