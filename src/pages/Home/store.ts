@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Alert } from 'react-native';
+import { Alert, ToastAndroid } from 'react-native';
 
 const sampledata = [
 	{
@@ -44,9 +44,11 @@ export const fetchDataFromLocalStorage = async () => {
 export const deleteStoredData = async () => {
 	try {
 		await AsyncStorage.removeItem('storedData'); // Remove the item with the key 'storedData'
-		Alert.alert('Success', 'Stored data deleted successfully!');
+		// Alert.alert('Success', 'Stored data deleted successfully!');
+		ToastAndroid.show('Success, Stored data deleted successfully!', ToastAndroid.SHORT);
 	} catch (error) {
-		Alert.alert('Error', 'Failed to delete the stored data.');
+		// Alert.alert('Error', 'Failed to delete the stored data.');
 		console.error('Error deleting storedData:', error);
+		ToastAndroid.show('Error, Failed to delete the stored data.', ToastAndroid.SHORT);
 	}
 };
