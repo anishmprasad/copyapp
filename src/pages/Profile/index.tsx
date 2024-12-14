@@ -1,11 +1,51 @@
-import React from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
+/* eslint-disable no-trailing-spaces */
+import React, { useEffect, useState } from 'react';
+import { View, Text, Image, StyleSheet, TouchableOpacity, ToastAndroid } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { deleteStoredData } from '../Home/store';
+import { GoogleSigninAuth } from '../../actions/authentication';
+import axios from 'axios';
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
+
 
 const ProfilePage = () => {
+	
+	const [files, setFiles] = useState([]);
+
 	const handleClickAction = () => {
 		deleteStoredData();
+	};
+	useEffect(()=>{
+		GoogleSigninAuth();
+	},[]);
+
+	// eslint-disable-next-line @typescript-eslint/no-shadow
+	const listDriveFiles = async (accessToken: any, setFiles: { (value: React.SetStateAction<never[]>): void; (arg0: any): void; }) => {
+		const headers = {
+			Authorization: `Bearer ${accessToken}`,
+		};
+
+		try {
+			const response = await axios.get('https://www.googleapis.com/drive/v3/files', { headers });
+			// eslint-disable-next-line @typescript-eslint/no-shadow
+			const files = response.data.files;
+			setFiles(files); // Store the files in state
+			console.log(files)
+			ToastAndroid.show('Success, Files Fetched from google drive!', ToastAndroid.SHORT);
+		} catch (error) {
+			console.error('Error fetching files:', error);
+			ToastAndroid.show('Failed, Error from google drive!', ToastAndroid.SHORT);
+		}
+	};
+
+	const fetchFiles = async () => {
+		try {
+			const { accessToken } = await GoogleSignin.getTokens(); // Ensure user is signed in
+			console.log('accessToken', accessToken);
+			await listDriveFiles(accessToken, setFiles); // Fetch files and update state
+		} catch (error) {
+			console.log('error from drive', error)
+		}
 	};
 	return (
 		<SafeAreaProvider>
@@ -24,6 +64,7 @@ const ProfilePage = () => {
 					<TouchableOpacity onPress={handleClickAction}>
 						<Text style={styles.clickableText}>Delete Stored Data</Text>
 					</TouchableOpacity>
+					<Text onPress={fetchFiles}>Fetch Google Drive Files</Text>
 				</View>
 			</SafeAreaView>
 		</SafeAreaProvider>

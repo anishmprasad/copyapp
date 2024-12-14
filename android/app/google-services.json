@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "426902679454",
+    "project_id": "copy-application",
+    "storage_bucket": "copy-application.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:426902679454:android:1d6597ef3fac21280fb08f",
+        "android_client_info": {
+          "package_name": "com.copyapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDKM6QPaWvmCimRQOQD0_EBr4__DkgOxEI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
