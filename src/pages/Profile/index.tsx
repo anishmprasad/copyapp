@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity, ToastAndroid } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { deleteStoredData } from '../Home/store';
-import { GoogleSigninAuth } from '../../actions/authentication';
+import { GoogleSigninAuth, signInWithGoogle } from '../../actions/authentication';
 import axios from 'axios';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 
@@ -33,6 +33,7 @@ const ProfilePage = () => {
 			console.log(files)
 			ToastAndroid.show('Success, Files Fetched from google drive!', ToastAndroid.SHORT);
 		} catch (error) {
+			signInWithGoogle();
 			console.error('Error fetching files:', error);
 			ToastAndroid.show('Failed, Error from google drive!', ToastAndroid.SHORT);
 		}
