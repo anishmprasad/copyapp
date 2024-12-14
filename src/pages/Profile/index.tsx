@@ -39,12 +39,14 @@ const ProfilePage = () => {
 	};
 
 	const fetchFiles = async () => {
+
 		try {
 			const { accessToken } = await GoogleSignin.getTokens(); // Ensure user is signed in
 			console.log('accessToken', accessToken);
 			await listDriveFiles(accessToken, setFiles); // Fetch files and update state
-		} catch (error) {
-			console.log('error from drive', error)
+		} catch (error: any) {
+			console.log('error from fetchFiles', error);
+			ToastAndroid.show('Not signed into Google Drive.', ToastAndroid.SHORT);
 		}
 	};
 	return (
